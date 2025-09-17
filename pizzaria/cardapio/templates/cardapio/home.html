@@ -1,0 +1,113 @@
+{% extends 'cardapio/base.html' %}
+
+{% block content %}
+<!-- Título principal -->
+<div class="">
+    <h1 class="">
+        <i class=""></i>
+        Nosso Cardápio
+        <i class=""></i>
+    </h1>
+    <p class="">
+        🍅 Pizzas feitas com amor pela Nonna Maria! 🍅
+    </p>
+</div>
+
+<!-- Seção de Pizzas Salgadas -->
+<section class="">
+    <h2 class="">
+        <i class=""></i>
+        Pizzas Salgadas 🧄
+    </h2>
+    
+    <div class="">
+        {% for pizza in pizzas_salgadas %}
+        <div class="">
+            <!-- Foto da pizza -->
+            {% if pizza.foto %}
+            <img src="{{ pizza.foto.url }}" class="" alt="{{ pizza.nome }}">
+            {% else %}
+            <div class="">
+                <i class=""></i>
+            </div>
+            {% endif %}
+            
+            <!-- Informações da pizza -->
+            <div class="">
+                <h3 class="">{{ pizza.nome }}</h3>
+                <p class="">{{ pizza.descricao|truncatewords:10 }}</p>
+                
+                <!-- Preço grande e bonito -->
+                <div class="">
+                    <span class="">
+                        R$ {{ pizza.preco_total|floatformat:2 }}
+                    </span>
+                    <p class="">
+                        <i class=""></i>{{ pizza.tempo_preparo }} minutos
+                    </p>
+                </div>
+                
+                <!-- Botão para ver detalhes -->
+                <div class="">
+                    <a href="{% url 'cardapio:detalhe_pizza' pizza.id %}" 
+                       class="">
+                        <i class=""></i> Ver Detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="">Nenhuma pizza salgada disponível no momento.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Seção de Pizzas Doces -->
+<section>
+    <h2 class="">
+        <i class=""></i>
+        Pizzas Doces
+    </h2>
+    
+    <div class="">
+        {% for pizza in pizzas_doces %}
+        <div class="">
+            <!-- Foto da pizza -->
+            {% if pizza.foto %}
+            <img src="{{ pizza.foto.url }}" class="" alt="{{ pizza.nome }}">
+            {% else %}
+            <div class="">
+                <i class=""></i>
+            </div>
+            {% endif %}
+            
+            <!-- Informações da pizza -->
+            <div class="">
+                <h3 class="">{{ pizza.nome }}</h3>
+                <p class="">{{ pizza.descricao|truncatewords:10 }}</p>
+                
+                <!-- Preço grande e bonito -->
+                <div class="">
+                    <span class="">
+                        R$ {{ pizza.preco_total|floatformat:2 }}
+                    </span>
+                    <p class="">
+                        <i class=""></i>{{ pizza.tempo_preparo }} minutos
+                    </p>
+                </div>
+                
+                <!-- Botão para ver detalhes -->
+                <div class="">
+                    <a href="{% url 'cardapio:detalhe_pizza' pizza.id %}" 
+                       class="">
+                        <i class=""></i> Ver Detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="">Nenhuma pizza doce disponível no momento.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'cardapio/base.html' %}
+
+{% block content %}
+<!-- Botão voltar -->
+<div class="">
+    <a href="{% url 'cardapio:home' %}" class="">
+        <i class=""></i> Voltar ao Cardápio
+    </a>
+</div>
+
+<div class="">
+    <!-- Lado esquerdo: Foto da pizza -->
+    <div class="">
+        {% if pizza.foto %}
+        <img src="{{ pizza.foto.url }}" class="" alt="{{ pizza.nome }}">
+        {% else %}
+        <div class="">
+            <i class=""></i>
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Lado direito: Informações -->
+    <div class="">
+        <!-- Tipo da pizza -->
+        <span class="" >
+            <i class=""></i>{{ pizza.tipo_pizza.nome }}
+        </span>
+        
+        <!-- Nome e descrição -->
+        <h1 class="">{{ pizza.nome }}</h1>
+        <p class="">{{ pizza.descricao }}</p>
+        
+        <!-- Preços explicados -->
+        <div class="">
+            <!-- Preço base -->
+            <div class="">
+                <p class="">Preço da Massa</p>
+                <p class="">R$ {{ pizza.preco_base|floatformat:2 }}</p>
+            </div>
+            
+            <!-- Custo dos ingredientes -->
+            <div class="">
+                <p class="">Custo dos Ingredientes</p>
+                <p class="">R$ {{ custo_total_ingredientes|floatformat:2 }}</p>
+            </div>
+        </div>
+        
+        <!-- Preço total gigante -->
+        <div class="">
+            <div class="">
+                <p class="">Preço Total</p>
+                <p class="">R$ {{ pizza.preco_total|floatformat:2 }}</p>
+                <p class="">
+                    <i class=""></i> Pronta em {{ pizza.tempo_preparo }} minutos
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lista detalhada de ingredientes -->
+<div class="">
+    <h2 class="">
+        <i class=""></i> Ingredientes e Preços:
+    </h2>
+    
+    <div class="">
+        {% for ingrediente_pizza in ingredientes %}
+        <div class="">
+            <div class="">
+                <!-- Nome do ingrediente -->
+                <div>
+                    <h3 class="">
+                        <i class=""></i>
+                        {{ ingrediente_pizza.ingrediente.nome }}
+                    </h3>
+                    <p class="">{{ ingrediente_pizza.quantidade_display }}</p>
+                </div>
+                
+                <!-- Cálculo do preço -->
+                <div class="">
+                    <p class="">
+                        {{ ingrediente_pizza.quantidade_numerica }}{{ ingrediente_pizza.ingrediente.unidade_medida }} × 
+                        R$ {{ ingrediente_pizza.ingrediente.preco_por_unidade|floatformat:3 }}
+                    </p>
+                    <p class="">
+                        R$ {{ ingrediente_pizza.custo_ingrediente|floatformat:2 }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modo de preparo -->
+<div class="">
+    <h2 class="">
+        <i class=""></i> Como Fazemos:
+    </h2>
+    <div class="">
+        <div class="">
+            <i class=""></i>
+            <div class="">{{ pizza.modo_preparo|linebreaks }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- Mensagem da Nonna -->
+<div class="">
+    <p class="">
+        <i class=""></i>
+        "Ogni pizza è fatta con amore!"
+        <i class=""></i>
+    </p>
+    <p class="">- SENAC PIZZA</p>
+</div>
+{% endblock %}

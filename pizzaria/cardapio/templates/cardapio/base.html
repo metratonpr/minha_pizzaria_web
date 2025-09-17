@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
+    <!-- Define a codificação de caracteres para suportar acentos -->
     <meta charset="UTF-8">
+     <!-- Ajusta a página para ser responsiva em dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENAC PIZZA</title>
+
+    <!-- Título que aparece na aba do navegador -->
+    <title>SENAC PIZZA</title>    
+   
 </head>
 
-<body>
-    <nav>
-        <div>
-            <div>
-                <!-- Logo -->
-                <a href="{% url 'cardapio.home' %}">SENAC PIZZA</a>
-            </div>
-            <div>
-                <ul>
-                    <li>
-                        <a href="{% url 'cardapio.home' %}">Cardapio</a>                       
-                    </li>
-                    <li>
-                        <a href="{% url 'cardapio.ingredientes' %}">Ingredientes</a>                       
-                    </li>
-                </ul>
+<!-- Corpo da página com fundo em degradê suave -->
+<body class="">
+    
+    <!-- Barra de navegação (como uma placa da pizzaria) -->
+    <nav class="">
+        <div class="">
+            <div class="">
+
+                 <!-- Logo e link para a página inicial -->
+                <a href="{% url 'cardapio:home' %}" class="">
+                    <i class="" ></i>
+                    SENAC PIZZA
+                </a>
+                
+                 <!-- Links de navegação (menu direito) -->
+                <div class="">
+                    <!-- Link para o cardápio -->
+                    <a href="{% url 'cardapio:home' %}" class="">
+                        <i class="" ></i> Cardápio
+                    </a>
+
+                     <!-- Link para a página de ingredientes -->
+                    <a href="{% url 'cardapio:ingredientes' %}" class="">
+                        <i class="" ></i> Ingredientes
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Area Principal -->
-    <main>
-        <div>
+    <!-- Área principal onde o conteúdo específico de cada página será exibido -->
+    <main class="">
+        <div class="">
             {% block content %}
             {% endblock %}
         </div>
     </main>
 
 </body>
-
 </html>

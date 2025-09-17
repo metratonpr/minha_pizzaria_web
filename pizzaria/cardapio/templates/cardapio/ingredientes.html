@@ -1,0 +1,113 @@
+{% extends 'cardapio/base.html' %}
+
+{% block content %}
+<!-- Botão voltar -->
+<div class="">
+    <a href="{% url 'cardapio:home' %}" class="">
+        <i class=""></i> Voltar ao Cardápio
+    </a>
+</div>
+
+<!-- Título da página -->
+<div class="">
+    <h1 class="">
+        <i class=""></i>
+        Nossos Ingredientes Frescos
+        <i class=""></i>
+    </h1>
+    <p class="">
+        🌱 Todos os preços são transparentes e calculados automaticamente! 🌱
+    </p>
+</div>
+
+<!-- Lista de ingredientes por categoria -->
+{% for tipo in tipos_ingredientes %}
+<section class="">
+    <!-- Título da categoria -->
+    <h2 class="">
+        <span class="">{{ tipo.icone }}</span>
+        {{ tipo.nome }}
+        <span class="">
+            {{ tipo.ingrediente_set.count }} ingredientes
+        </span>
+    </h2>
+    
+    <!-- Grid de ingredientes -->
+    <div class="">
+        {% for ingrediente in tipo.ingrediente_set.all %}
+        <div class="">
+            
+            <!-- Cabeçalho do ingrediente -->
+            <div class="">
+                <h3 class="">{{ ingrediente.nome }}</h3>
+                {% if ingrediente.disponivel %}
+                <span class="">
+                    <i class=""></i>Disponível
+                </span>
+                {% else %}
+                <span class="">
+                    <i class=""></i>Em Falta
+                </span>
+                {% endif %}
+            </div>
+            
+            <!-- Card de preço -->
+            <div class="">
+                <div class="">
+                    <p class="">Preço por {{ ingrediente.unidade_medida }}</p>
+                    <p class="">
+                        R$ {{ ingrediente.preco_por_unidade|floatformat:3 }}
+                    </p>
+                    <p class="">
+                        Exemplo: 100{{ ingrediente.unidade_medida }} = 
+                        R$ {{ ingrediente.preco_por_unidade|floatformat:2|add:"00" }}
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Emoji grande do tipo -->
+            <div class="">
+                <span class="">{{ tipo.icone }}</span>
+            </div>
+        </div>
+        {% empty %}
+        <div class="">
+            <p class="">
+                <i class=""></i>
+                Nenhum ingrediente cadastrado nesta categoria ainda.
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% empty %}
+<div class="">
+    <div class="">
+        <i class=""></i>
+        <p class="">Ops! Ainda não temos ingredientes cadastrados.</p>
+        <p class="">Vá no painel administrativo para adicionar alguns!</p>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Informação explicativa -->
+<div class="">
+    <h3 class="">
+        <i class=""></i> Como Calculamos os Preços?
+    </h3>
+    <div class="">
+        <div class="">
+            <i class=""></i>
+            <p><strong>Preço Base</strong><br>Massa, molho, trabalho</p>
+        </div>
+        <div class="">
+            <i class=""></i>
+            <p><strong>+ Ingredientes</strong><br>Quantidade × Preço unitário</p>
+        </div>
+        <div class="">
+            <i class=""></i>
+            <p><strong>= Preço Final</strong><br>Tudo calculado automaticamente!</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

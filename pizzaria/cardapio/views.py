@@ -1,17 +1,29 @@
-from django.shortcuts import render
-from .models import TipoIngrediente, TipoPizza, Ingrediente, Pizza, IngredientePizza
+from django.shortcuts import render, get_object_or_404
+from .models import Pizza, TipoPizza, Ingrediente, IngredientePizza, TipoIngrediente
 
-# Create your views here.
 def home(request):
-    """Pagina Inicial"""
-    pizzas_salgadas = Pizza.objects.filter(tipo_pizza__nome="Salgada", ativa=True)
-    pizzas_doces = Pizza.objects.filter(tipo_pizza__nome="Doce", ativa=True)
-
-    #Dicionario com os dados que eu quero mostrar na tela
+    pizzas_salgadas = Pizza.objects.filter(tipo_pizza__nome='Salgada', ativa=True)
+    pizzas_doces = Pizza.objects.filter(tipo_pizza__nome='Doce', ativa=True)
     context = {
-        "pizzas_salgadas" : pizzas_salgadas,
-        "pizzas_doces" : pizzas_doces
+        'pizzas_salgadas': pizzas_salgadas,
+        'pizzas_doces': pizzas_doces,
     }
-
-    #Renderizar - mostrar na tela
     return render(request, 'cardapio/home.html', context)
+
+def detalhe_pizza(request, pizza_id):
+    pizza = get_object_or_404(Pizza, id=pizza_id)
+    ingredientes = IngredientePizza.objects.filter(pizza=pizza)
+    custo_total_ingredientes = sum(ing.custo_ingrediente for ing in ingredientes)
+    context = {
+        'pizza': pizza,
+        'ingredientes': ingredientes,
+        'custo_total_ingredientes': custo_total_ingredientes,
+    }
+    return render(request, 'cardapio/detalhe_pizza.html', context)
+
+def ingredientes(request):
+    tipos_ingredientes = TipoIngrediente.objects.all()
+    context = {
+        'tipos_ingredientes': tipos_ingredientes,
+    }
+    return render(request, 'cardapio/ingredientes.html', context)
