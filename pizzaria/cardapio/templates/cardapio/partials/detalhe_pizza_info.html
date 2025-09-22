@@ -1,0 +1,41 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+    <!-- Foto -->
+    <div>
+        {% if pizza.foto %}
+        <img src="{{ pizza.foto.url }}" class="w-full h-80 object-cover rounded-xl shadow-md" alt="{{ pizza.nome }}">
+        {% else %}
+        <div class="w-full h-80 flex items-center justify-center bg-gray-200 text-gray-500 rounded-xl">
+            <i class="fas fa-pizza-slice text-6xl"></i>
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Informações -->
+    <div class="space-y-4">
+        <span class="text-sm bg-red-100 text-red-600 px-3 py-1 rounded-lg inline-flex items-center gap-1">
+            <i class="fas fa-tag"></i>{{ pizza.tipo_pizza.nome }}
+        </span>
+        
+        <h1 class="text-3xl font-bold text-gray-800">{{ pizza.nome }}</h1>
+        <p class="text-gray-600">{{ pizza.descricao }}</p>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-500">Preço da Massa</p>
+                <p class="text-lg font-semibold">R$ {{ pizza.preco_base|floatformat:2 }}</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-500">Ingredientes</p>
+                <p class="text-lg font-semibold">R$ {{ custo_total_ingredientes|floatformat:2 }}</p>
+            </div>
+        </div>
+        
+        <div class="bg-red-50 p-6 rounded-xl shadow-md text-center">
+            <p class="text-sm text-gray-600">Preço Total</p>
+            <p class="text-3xl font-bold text-red-600">R$ {{ pizza.preco_total|floatformat:2 }}</p>
+            <p class="text-sm text-gray-500 mt-2 flex items-center justify-center gap-1">
+                <i class="fas fa-clock"></i> Pronta em {{ pizza.tempo_preparo }} minutos
+            </p>
+        </div>
+    </div>
+</div>

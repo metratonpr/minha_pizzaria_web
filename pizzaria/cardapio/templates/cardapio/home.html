@@ -1,23 +1,12 @@
-{% extends "cardapio/base.html" %}
+{% extends 'cardapio/base.html' %}
 
 {% block content %}
-  {% include "cardapio/partials/title_block.html" with
-      titulo="Nosso Cardápio"
-      subtitulo="🍅 Pizzas feitas com amor pela Nonna Maria! 🍅"
-      only
-  %}
+    <!-- Título principal -->
+    {% include 'cardapio/partials/titulo.html' %}
 
-  {% include "cardapio/partials/pizza_section.html" with
-      titulo_secao="Pizzas Salgadas 🧄"
-      lista_pizzas=pizzas_salgadas
-      mensagem_vazia="Nenhuma pizza salgada disponível no momento."
-      only
-  %}
+    <!-- Seção de Pizzas Salgadas -->
+    {% include 'cardapio/partials/secao_pizzas.html' with titulo="Pizzas Salgadas 🧄" icone="fas fa-lemon" cor="green" pizzas=pizzas_salgadas vazio="Nenhuma pizza salgada disponível no momento." %}
 
-  {% include "cardapio/partials/pizza_section.html" with
-      titulo_secao="Pizzas Doces 🍫"
-      lista_pizzas=pizzas_doces
-      mensagem_vazia="Nenhuma pizza doce disponível no momento."
-      only
-  %}
+    <!-- Seção de Pizzas Doces -->
+    {% include 'cardapio/partials/secao_pizzas.html' with titulo="Pizzas Doces 🍫" icone="fas fa-ice-cream" cor="pink" pizzas=pizzas_doces vazio="Nenhuma pizza doce disponível no momento." %}
 {% endblock %}

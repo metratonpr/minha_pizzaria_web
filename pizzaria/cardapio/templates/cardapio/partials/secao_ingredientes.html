@@ -1,0 +1,24 @@
+<section class="my-8">
+    <!-- Cabeçalho da categoria -->
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center justify-between">
+        <span class="flex items-center gap-2">
+            <span class="text-2xl">{{ tipo.icone }}</span>
+            {{ tipo.nome }}
+        </span>
+        <span class="text-sm text-gray-500">
+            {{ tipo.ingrediente_set.count }} ingredientes
+        </span>
+    </h2>
+    
+    <!-- Grid de ingredientes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for ingrediente in tipo.ingrediente_set.all %}
+            {% include 'cardapio/partials/card_ingrediente.html' with ingrediente=ingrediente tipo=tipo %}
+        {% empty %}
+        <div class="col-span-3 text-center p-6 bg-gray-50 rounded-xl">
+            <i class="fas fa-box-open text-gray-400 text-3xl mb-2"></i>
+            <p class="text-gray-500">Nenhum ingrediente cadastrado nesta categoria ainda.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>

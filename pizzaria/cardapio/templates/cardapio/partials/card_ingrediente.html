@@ -1,0 +1,31 @@
+<div class="bg-white rounded-xl shadow-md p-4 flex flex-col justify-between hover:shadow-lg transition">
+    
+    <!-- Cabeçalho -->
+    <div class="flex items-center justify-between mb-3">
+        <h3 class="text-lg font-bold text-gray-800">{{ ingrediente.nome }}</h3>
+        {% if ingrediente.disponivel %}
+        <span class="text-green-600 flex items-center gap-1 text-sm">
+            <i class="fas fa-check-circle"></i> Disponível
+        </span>
+        {% else %}
+        <span class="text-red-600 flex items-center gap-1 text-sm">
+            <i class="fas fa-times-circle"></i> Em Falta
+        </span>
+        {% endif %}
+    </div>
+
+    <!-- Preço -->
+    <div class="bg-gray-50 p-4 rounded-lg text-center mb-3">
+        <p class="text-sm text-gray-500">Preço por {{ ingrediente.unidade_medida }}</p>
+        <p class="text-xl font-bold text-green-700">R$ {{ ingrediente.preco_por_unidade|floatformat:3 }}</p>
+        <p class="text-xs text-gray-500 mt-1">
+            Exemplo: 100{{ ingrediente.unidade_medida }} ≈ 
+            R$ {{ ingrediente.preco_por_unidade|floatformat:2|add:"00" }}
+        </p>
+    </div>
+
+    <!-- Emoji grande -->
+    <div class="text-center text-4xl">
+        {{ tipo.icone }}
+    </div>
+</div>

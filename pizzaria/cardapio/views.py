@@ -30,11 +30,9 @@ def home(request):
 # -------------------------------
 def detalhe_pizza(request, pizza_id):
     """Página de detalhes de uma pizza"""
-
     # Busca a pizza pelo ID recebido na URL
     # Se não existir, retorna página de erro 404
     pizza = get_object_or_404(Pizza, id=pizza_id)
-
     # Busca todos os ingredientes relacionados a essa pizza
     ingredientes = IngredientePizza.objects.filter(pizza=pizza)
     
@@ -47,7 +45,6 @@ def detalhe_pizza(request, pizza_id):
         'ingredientes': ingredientes,
         'custo_total_ingredientes': custo_total_ingredientes,
     }
-
      # Renderiza o template 'detalhe_pizza.html', passando o contexto
     return render(request, 'cardapio/detalhe_pizza.html', context)
 

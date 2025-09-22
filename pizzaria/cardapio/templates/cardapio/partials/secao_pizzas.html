@@ -1,0 +1,14 @@
+<section class="my-10">
+    <h2 class="text-2xl font-semibold text-{{ cor }}-700 mb-6 flex items-center gap-2">
+        <i class="{{ icone }}"></i>
+        {{ titulo }}
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for pizza in pizzas %}
+            {% include 'cardapio/partials/card_pizza.html' with pizza=pizza cor=cor %}
+        {% empty %}
+            <p class="col-span-3 text-center text-gray-500">{{ vazio }}</p>
+        {% endfor %}
+    </div>
+</section>
